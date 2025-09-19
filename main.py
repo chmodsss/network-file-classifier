@@ -1,9 +1,14 @@
 import os
 import json
+import logging
 from config import INPUT_DIR, OUTPUT_DIR
 from datetime import datetime
 from pdf_reader import load_pdf_text
-from classifier import classify_text_with_llm, ClassificationResult
+from classifier import classify_text_with_llm, ClassificationResult, classify_text_mock
+
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
 def classify_pdfs_in_folder(folder_path: str):
@@ -11,9 +16,10 @@ def classify_pdfs_in_folder(folder_path: str):
     for filename in os.listdir(folder_path):
         if filename.lower().endswith(".pdf"):
             filepath = os.path.join(folder_path, filename)
-            print(f"Processing: {filepath}")
+            logger.info(f"Processing: {filepath}")
             text = load_pdf_text(filepath)
-            classification: ClassificationResult = classify_text_with_llm(text)
+            # classification: ClassificationResult = classify_text_with_llm(text)
+            classification: ClassificationResult = classify_text_mock(text)
             results.append(
                 {
                     "filename": filename,
@@ -35,11 +41,11 @@ def write_output(data):
     with open(target_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
-    print(f"\nClassification results saved to {target_file}")
+    logger.info(f"Classification results saved to {target_file}")
 
 
 if __name__ == "__main__":
     classified_data = classify_pdfs_in_folder(INPUT_DIR)
     write_output(classified_data)
     for item in classified_data:
-        print(item)
+        logger.info(item)
