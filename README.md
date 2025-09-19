@@ -12,11 +12,25 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 ## Features
 
-- PDF text extraction using LangChain's `PyPDFLoader`
-- Classification prompt enforces strict JSON output format
-- Output parsed and validated by Pydantic models for robust typing
-- Modular design for easy extensibility and integration with other tools
-- Batch processing of multiple PDFs in a folder
+- PDF text extraction using LangChain’s `PyPDFLoader`
+
+- Strict classification prompt enforcing `JSON` output format for consistent, machine-readable results.
+
+- Parsing and validation of classification output with Pydantic models, ensuring robust data typing.
+
+- Parallel processing of multiple PDFs using Python’s `concurrent.futures` to speed up batch classification.
+
+- API rate limit enforcement via throttling, controlling LLM calls to avoid exceeding usage quotas and unexpected costs.
+
+- Flexible execution modes:
+  - As a standalone Python application for batch processing from command line.
+  - As a FastAPI REST API endpoint for integration with other services.
+  - As a Streamlit interactive UI web app for easy user interaction.
+
+- Mock classification functionality, enabling offline testing without actual LLM API calls.
+
+- Comprehensive logging for monitoring, debugging, and traceability.
+
 
 ---
 
@@ -45,10 +59,12 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 2. Adjust `INPUT_DIR` and `OUTPUT_DIR` in `config.py` file if needed
 
-3. Run the classification script:
-`python main.py`
+3. Run the application:
+   1. Execute `python main.py` from command line to run the applicaion in console mode
+   2. Execute `uvicorn app:app --reload` to access the application via api endpoints at `localhost:8000`
+   3. Execute `streamlit run streamlitapp.py` to run the application via a web UI at `localhost:8501`
 
-1. Classification results are written to the `OUTPUT_DIR` as well as printed to the console
+4. Classification results are written to the `OUTPUT_DIR` as well as printed to the console
 
 ---
 
