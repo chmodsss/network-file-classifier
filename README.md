@@ -42,11 +42,13 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 ## Usage
 
 1. Place your PDF files in the `pdf_files/` directory or any folder you prefer  
-2. Adjust `folder` and parameters in `main.py` if needed
+
+2. Adjust `INPUT_DIR` and `OUTPUT_DIR` in `config.py` file if needed
+
 3. Run the classification script:
 `python main.py`
 
-4. Classification results are printed to the console as JSON-like dictionaries per file
+1. Classification results are written to the `OUTPUT_DIR` as well as printed to the console
 
 ---
 
@@ -56,6 +58,7 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 - `pdf_reader.py` — Loads and extracts text from PDFs using LangChain  
 - `classifier.py` — Contains the OpenAI Chat LLM call with structured prompt and output parsing via Pydantic
 - `config.py` — Stores prompt templates and configuration constants  
-- `pdf_files/` — Folder where your PDF files reside  
+- `pdf_files/` — Folder where your PDF files reside
+- `output/` - Folder where the output files are stored
 
 ---

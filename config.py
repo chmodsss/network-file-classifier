@@ -1,3 +1,7 @@
+INPUT_DIR = "pdf_files/"
+
+OUTPUT_DIR = "output/"
+
 CLASSIFIER_PROMPT = """
 Classify the following document text into these categories:
 (1) Is the document technical (True or False)?

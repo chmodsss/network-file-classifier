@@ -1,5 +1,5 @@
 import os
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel
@@ -18,7 +18,6 @@ class ClassificationResult(BaseModel):
     vendor: Optional[str]
 
 
-# Create output parser from Pydantic model
 output_parser = PydanticOutputParser(pydantic_object=ClassificationResult)
 
 
@@ -32,13 +31,9 @@ def classify_text_with_llm(
         + classification_prompt
     )
 
-    # Initialize OpenAI Chat LLM
     llm = ChatOpenAI(model_name=model, temperature=0)
+    response = llm.invoke([HumanMessage(content=prompt)])
 
-    # Call the LLM with prompt wrapped in HumanMessage
-    response = llm([HumanMessage(content=prompt)])
-
-    # Parse the response content with the structured output parser
     classification = output_parser.parse(response.content)
 
     return classification
