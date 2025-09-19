@@ -22,18 +22,22 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 ## Setup
 
-1. Clone the repository  
-2. Install dependencies:
+1. Clone the repository
+   `git clone https://github.com/chmodsss/network-file-classifier`
 
-`pip install -r requirements.txt`
+2. Install dependencies:
+    `pip install -r requirements.txt`
 
 3. Set your OpenAI API key as an environment variable in `.env` file
+   ```
+   OPENAI_API_KEY="sk-proj-lK78q....."
+   ```
 
 ---
 
 ## Usage
 
-1. Place your PDF files in the `src/` directory or any folder you prefer  
+1. Place your PDF files in the `pdf_files/` directory or any folder you prefer  
 2. Adjust `folder` and parameters in `main.py` if needed
 3. Run the classification script:
 
@@ -49,6 +53,6 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 - `classifier.py` — Contains the OpenAI Chat LLM call with structured prompt and output parsing via Pydantic  
 - `main.py` — Entry point: orchestrates batch processing of PDFs and prints results  
 - `config.py` — (Optional) Stores prompt templates and configuration constants  
-- `src/` — Folder where your PDF files reside  
+- `pdf_files/` — Folder where your PDF files reside  
 
 ---

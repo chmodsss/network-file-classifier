@@ -24,7 +24,7 @@ def classify_pdfs_in_folder(folder_path: str):
 
 
 if __name__ == "__main__":
-    folder = "./src"  # Set your PDF folder
+    folder = "./pdf_files"  # Set your PDF folder
     classified_data = classify_pdfs_in_folder(folder)
     for item in classified_data:
         print(item)
