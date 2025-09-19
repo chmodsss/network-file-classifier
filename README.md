@@ -57,7 +57,7 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 1. Place your PDF files in the `pdf_files/` directory or any folder you prefer  
 
-2. Adjust `INPUT_DIR` and `OUTPUT_DIR` in `config.py` file if needed
+2. Adjust `INPUT_DIR`, `OUTPUT_DIR` and `TEMP_DIR` in `config.py` file if needed
 
 3. Run the application:
    1. Execute `python main.py` from command line to run the applicaion in console mode
@@ -66,15 +66,25 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 4. Classification results are written to the `OUTPUT_DIR` as well as printed to the console
 
+
+---
+
+## NOTE:
+* Before running the application, make sure the `mock_flag` is set to `False` in `main.py` or `app.py` or `streamlitapp.py`, whichever one you wishes to run. Setting it to False ensures that the application runs LLM calls to classify the pdfs. For testing purposes and not to waste any api credits, set the flag to True
+* If needed, change the name of the OpenAI chat model in `main.py` or `app.py` or `streamlitapp.py` before running the application.
+
 ---
 
 ## File Structure
 
-- `main.py` — Entry point: orchestrates batch processing of PDFs and prints results  
+- `main.py` — Entry point: orchestrates batch processing of PDFs and prints results
+- `streamlitapp.py` - Runs the application in a web UI
+- `app.py` - Publishes the application via API endpoints
 - `pdf_reader.py` — Loads and extracts text from PDFs using LangChain  
 - `classifier.py` — Contains the OpenAI Chat LLM call with structured prompt and output parsing via Pydantic
 - `config.py` — Stores prompt templates and configuration constants  
+- `writer.py` - Handles saving classification results to a timestamped JSON file.
 - `pdf_files/` — Folder where your PDF files reside
 - `output/` - Folder where the output files are stored
-
+- `.temp_uploads/` - Folder will be managed by streamlit and FastAPI to store uploaded files
 ---

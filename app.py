@@ -2,12 +2,13 @@ from fastapi import FastAPI, UploadFile, File
 from classifier import Classifier
 import shutil
 import os
+from config import TEMP_DIR
 
 app = FastAPI()
-c = Classifier()
+c = Classifier(mock_flag=False, model="gpt-4o")
 
-INPUT_DIR = "./.temp_uploads"
-os.makedirs(INPUT_DIR, exist_ok=True)
+
+os.makedirs(TEMP_DIR, exist_ok=True)
 
 
 @app.get("/", tags=["Get Methods"])
@@ -17,7 +18,7 @@ async def home():
 
 @app.post("/classify-pdf/")
 async def classify_pdf(file: UploadFile = File(...)):
-    file_location = os.path.join(INPUT_DIR, file.filename)
+    file_location = os.path.join(TEMP_DIR, file.filename)
 
     with open(file_location, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)

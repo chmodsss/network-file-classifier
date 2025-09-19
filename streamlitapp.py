@@ -1,9 +1,10 @@
 import streamlit as st
 import os
+from config import TEMP_DIR
 from concurrent.futures import ThreadPoolExecutor
 from classifier import Classifier
 
-c = Classifier()
+c = Classifier(mock_flag=False, model="gpt-4o")
 
 st.title("Network File Classification App")
 
@@ -17,12 +18,11 @@ def classify_file(file_path):
 
 
 if uploaded_files:
-    temp_dir = ".temp_uploads"
-    os.makedirs(temp_dir, exist_ok=True)
+    os.makedirs(TEMP_DIR, exist_ok=True)
 
     file_paths = []
     for uploaded_file in uploaded_files:
-        file_path = os.path.join(temp_dir, uploaded_file.name)
+        file_path = os.path.join(TEMP_DIR, uploaded_file.name)
 
         # Save uploaded file temporarily
         with open(file_path, "wb") as f:

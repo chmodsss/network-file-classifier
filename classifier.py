@@ -29,7 +29,7 @@ output_parser = PydanticOutputParser(pydantic_object=ClassificationResult)
 
 class Classifier:
 
-    def __init__(self, mock_flag=False, model="gpt-4o-mini", max_calls_per_minute=60):
+    def __init__(self, mock_flag=False, model="gpt-4o", max_calls_per_minute=60):
         """
         Initialize the Classifier.
 
