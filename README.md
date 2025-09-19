@@ -61,7 +61,7 @@ Classification is done via OpenAI's GPT-4 model, integrated through LangChain, w
 
 3. Run the application:
    1. Execute `python main.py` from command line to run the applicaion in console mode
-   2. Execute `uvicorn app:app --reload` to access the application via api endpoints at `localhost:8000`
+   2. Execute `uvicorn app:app --reload` to access the application via api endpoints at `localhost:8000/docs`
    3. Execute `streamlit run streamlitapp.py` to run the application via a web UI at `localhost:8501`
 
 4. Classification results are written to the `OUTPUT_DIR` as well as printed to the console
